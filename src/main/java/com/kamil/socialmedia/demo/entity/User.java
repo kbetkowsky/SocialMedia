@@ -41,6 +41,13 @@ public class User implements UserDetails {
     orphanRemoval = true)
     private Set<Post> posts = new HashSet<>();
 
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private Set<Message> sentMessages = new HashSet<>();
+
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
+    private Set<Message> receivedMessages = new HashSet<>();
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

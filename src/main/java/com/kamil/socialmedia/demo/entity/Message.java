@@ -30,4 +30,14 @@ public class Message {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipient_id", nullable = false)
+    private User recipient;
+
+    @PrePersist
+    public void prePersist() {
+        sentAt = LocalDateTime.now();
+        read = false;
+    }
 }
